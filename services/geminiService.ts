@@ -15,28 +15,22 @@ export async function runChat(prompt: string, location: { latitude: number; long
       throw new Error(`Error del servidor: ${errorData.error || 'Error desconocido'}`);
     }
 
-    const { reply, placesInfo } = await backendResponse.json();
-    
-    const responseText = reply || "No he recibido una respuesta válida de mi servidor.";
-    const mapLinks: { name: string, url: string }[] = [];
+    const { response } = await backendResponse.json();
 
-    if (placesInfo && placesInfo.length > 0) {
-      for (const place of placesInfo) {
-          const queryParts = [place.name, place.city, place.department, "Colombia"].filter(Boolean);
-          const fullQuery = queryParts.join(', ');
-          const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullQuery)}`;
-          mapLinks.push({ name: place.name, url: mapUrl });
-      }
-    }
+    const responseText = response || "No he recibido una respuesta válida de mi servidor.";
 
-    return { responseText, placesInfo: placesInfo || [], mapLinks };
+    return {
+      responseText,
+      placesInfo: [],
+      mapLinks: []
+    };
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in runChat function:', error);
-    return { 
-        responseText: `Lo siento, tengo problemas para conectarme con mi servidor. Por favor, asegúrate de que esté en funcionamiento e inténtalo de nuevo. (${error.message})`,
-        placesInfo: [],
-        mapLinks: [],
+    return {
+      responseText: `Lo siento, tengo problemas para conectarme con mi servidor. Por favor, asegúrate de que esté en funcionamiento e inténtalo de nuevo. (${error.message || error})`,
+      placesInfo: [],
+      mapLinks: [],
     };
   }
 }
