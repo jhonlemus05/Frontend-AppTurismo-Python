@@ -1,6 +1,6 @@
 import { GroundingChunk } from '../types';
 
-const BACKEND_ENDPOINT = (import.meta.env.VITE_BACKEND_URL || 'https://gemini-backend-ca0r.onrender.com') + '/api/chat';
+const BACKEND_ENDPOINT = (import.meta.env.VITE_BACKEND_URL || 'https://backend-appturismo-python.onrender.com') + '/api/chat';
 
 export async function runChat(prompt: string, location: { latitude: number; longitude: number } | null) {
   try {
