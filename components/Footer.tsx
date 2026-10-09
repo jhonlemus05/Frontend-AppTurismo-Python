@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="border-t border-white/20 mt-8 pt-6 text-center text-sm text-gray-400">
-          <p>Copyright 2024 Diseñado por un Ingeniero Frontend React Senior de Clase Mundial</p>
+          <p>Copyright 2024 Diseñado por un grupo de estudiantes</p>
         </div>
       </div>
     </footer>
